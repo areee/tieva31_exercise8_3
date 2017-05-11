@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.util.Calendar;
 import java.util.logging.Level;
@@ -160,10 +161,26 @@ class WeekTrayIcon extends TrayIcon implements ActionListener {
         BufferedImage r = new BufferedImage(16, 16, BufferedImage.TYPE_4BYTE_ABGR);
         Graphics2D g = r.createGraphics();
         g.setColor(Color.WHITE);
-        g.fill(new Ellipse2D.Double(2, 2, 12, 12));
+
+        // a white square background for the calendar icon:
+        g.fill(new Rectangle2D.Double(2, 2, 12, 12));
         g.setColor(Color.BLACK);
-        g.draw(new Ellipse2D.Double(2, 2, 14, 14));
-        g.draw(new Line2D.Double(8, 8, 10, 4));
+
+        // a black frame for the calendar icon:
+        g.draw(new Line2D.Double(2, 2, 14, 2));
+        g.draw(new Line2D.Double(2, 2, 2, 14));
+        g.draw(new Line2D.Double(14, 2, 14, 14));
+        g.draw(new Line2D.Double(2, 14, 14, 14));
+
+        // black vertical lines for the calendar icon:
+        g.draw(new Line2D.Double(6, 4, 6, 14));
+        g.draw(new Line2D.Double(10, 4, 10, 14));
+
+        // black horizontal lines for the calendar icon:
+        g.draw(new Line2D.Double(2, 4, 14, 4));
+        g.draw(new Line2D.Double(2, 8, 14, 8));
+        g.draw(new Line2D.Double(2, 12, 14, 12));
+
         return r;
     }
 
